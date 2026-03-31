@@ -56,7 +56,6 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         .font-serif { font-family: 'Playfair Display', serif; }
-        .text-sage-600 { color: var(--sage-600); }
         .hover-lift {
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
@@ -92,7 +91,7 @@
 
     <main class="pt-48 pb-32 px-6 max-w-6xl mx-auto">
 
-        <!-- ── VIEW 1: HOME ── -->
+        <!-- VIEW 1: HOME -->
         <div id="home-view" class="space-y-40">
             <section class="max-w-3xl">
                 <p class="text-[10px] font-bold tracking-[0.4em] uppercase mb-6" style="color:var(--sage-600)">A Phonetic Archive</p>
@@ -106,7 +105,7 @@
                 </p>
             </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="accent-grid"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="accent-grid"></div>
 
             <section id="about-section" class="pt-32 border-t" style="border-color:var(--sage-200)">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
@@ -119,10 +118,11 @@
             </section>
         </div>
 
-        <!-- ── VIEW 2: SPECIMEN LIST ── -->
+        <!-- VIEW 2: SPECIMEN LIST -->
         <div id="specimen-view" class="hidden">
             <button onclick="showHome()" class="flex items-center text-[10px] font-bold tracking-widest uppercase opacity-40 hover:opacity-100 transition mb-16">
-                <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Back to Collection
+                <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                Back to Collection
             </button>
             <header class="mb-20">
                 <span id="sp-tag" class="text-[10px] font-bold tracking-[0.4em] uppercase" style="color:var(--sage-600)"></span>
@@ -132,11 +132,12 @@
             <div class="space-y-6" id="specimen-list"></div>
         </div>
 
-        <!-- ── VIEW 3: SPECIMEN DETAIL ── -->
+        <!-- VIEW 3: DETAIL -->
         <div id="detail-view" class="hidden">
             <div class="flex items-center gap-6 mb-16 flex-wrap">
                 <button onclick="backToSpecimen()" class="flex items-center text-[10px] font-bold tracking-widest uppercase opacity-40 hover:opacity-100 transition">
-                    <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Back to Specimens
+                    <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                    Back to Specimens
                 </button>
                 <span class="opacity-20">·</span>
                 <span id="det-breadcrumb" class="text-[10px] font-bold tracking-widest uppercase opacity-30"></span>
@@ -148,7 +149,6 @@
                         <span id="det-tag" class="text-[10px] font-bold tracking-[0.4em] uppercase" style="color:var(--sage-600)"></span>
                         <p id="det-label" class="text-sm font-light opacity-40 mt-2 mb-1 tracking-widest uppercase"></p>
                         <h2 id="det-name" class="text-5xl md:text-6xl font-light mt-2 mb-10 tracking-tighter"></h2>
-
                         <div class="inline-flex p-1 rounded-full" style="background:rgba(95,122,97,0.08)">
                             <button id="btn-learner" onclick="setMode('learner')" class="px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition btn-toggle-active">Learner</button>
                             <button id="btn-linguist" onclick="setMode('linguist')" class="px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition opacity-50">Linguist</button>
@@ -158,7 +158,7 @@
                     <div class="glass-card rounded-[2.5rem] p-12 space-y-12">
                         <section>
                             <label class="text-[10px] font-bold tracking-widest uppercase opacity-30 mb-6 block">Audio Specimen</label>
-                            <audio id="det-audio" controls class="w-full"></audio>
+                            <div id="det-audio-wrap"></div>
                         </section>
                         <section>
                             <label class="text-[10px] font-bold tracking-widest uppercase opacity-30 mb-6 block">Transcription</label>
@@ -195,46 +195,49 @@
                 </div>
             </div>
         </div>
-
     </main>
 
     <script>
+    // ─── SHARED TRANSCRIPT (Stella Passage) ──────────────────────────────────
+    const STELLA = "Please call Stella. Ask her to bring these things with her from the store: Six spoons of fresh snow peas, five thick slabs of blue cheese, and maybe a snack for her brother Bob. We also need a small plastic snake and a big toy frog for the kids. She can scoop these things into three red bags, and we will go meet her Wednesday at the train station.";
+
+    // ─── DATA ────────────────────────────────────────────────────────────────
     const accents = [
         {
             id: "british",
             tag: "United Kingdom",
             name: "British English",
-            desc: "The accent of England's educated south, long considered the prestige variety of English. Explore how vowel quality, rhythm, and consonant articulation set it apart from other World Englishes.",
+            desc: "British English, rooted in the United Kingdom and including both Received Pronunciation and regional varieties such as Midlands and Scottish accents, is a major global English variety. Characterized by non-rhotic pronunciation, frequent glottalization of /t/, and distinct vowel qualities that clearly contrast with American English.",
             specimens: [
                 {
                     id: "brit-1",
                     label: "Specimen 01",
-                    subtitle: "Formal Narrative",
-                    audioUrl: "#",
-                    transcript: "The quick brown fox jumps over the lazy dog near the riverbank.",
-                    analysis: "• <b>Non-rhoticity</b>: /r/ is silent after vowels — 'near' /nɪə/, 'river' /ˈrɪvə/.<br>• <b>BATH–TRAP split</b>: 'fast' uses broad /ɑː/, not the short /æ/ of GA.<br>• <b>Clear /t/</b>: Crisp alveolar stops with minimal aspiration reduction.<br>• <b>Yod retention</b>: 'new' pronounced /njuː/ rather than /nuː/.",
-                    quizText: "The quick brown fox jumps over the ___ dog.",
-                    answer: "lazy"
+                    subtitle: "Male Speaker, Age 27 — Littlehampton, UK",
+                    audioUrl: "audio/british_sp01.mp3",
+                    transcript: STELLA,
+                    analysis: `• <b>Glottalization</b>: Intervocalic /t/ is realized as a glottal stop [ʔ], e.g., "into" [ɪnʔə], "meet" [miːʔ].<br>• <b>Non-rhoticity (r-deletion)</b>: Post-vocalic /r/ is deleted, e.g., "her" [hɜː], "store" [stɔː].<br>• <b>Consonant cluster simplification</b>: Final clusters are often reduced in connected speech.`,
+                    quizText: "Please call Stella. Ask her to bring these things with her from the ______.",
+                    answer: "store"
                 },
                 {
                     id: "brit-2",
                     label: "Specimen 02",
-                    subtitle: "Professional Register",
-                    audioUrl: "#",
-                    transcript: "I'd rather have a cup of tea than coffee after half past three.",
-                    analysis: "• <b>Vowel quality</b>: 'rather' /ˈrɑːðə/, 'after' /ˈɑːftə/ — broad BATH vowel throughout.<br>• <b>Linking /r/</b>: Where a word ending in silent /r/ is followed by a vowel, /r/ may re-emerge.<br>• <b>Intonation</b>: Falling tone on final lexical item, marking declarative certainty.<br>• <b>Weak forms</b>: 'than', 'have', 'of' are systematically reduced in connected speech.",
-                    quizText: "I'd rather have a cup of ___ than coffee.",
-                    answer: "tea"
+                    subtitle: "Female Speaker, Age 30 — Birmingham, UK",
+                    audioUrl: "audio/british_sp02.mp3",
+                    transcript: STELLA,
+                    analysis: `• <b>Glottalization</b>: /t/ becomes [ʔ] in medial position, e.g., "plastic" [ˈplæsʔɪk], "into" [ɪnʔə].<br>• <b>Non-rhoticity (r-deletion)</b>: Post-vocalic /r/ is not pronounced, e.g., "her" [hɜː], "store" [stɔː].<br>• <b>Vowel shortening (BATH words)</b>: /æ/ remains short in words like "ask" [æsk], typical of Midlands English.`,
+                    quizText: "She can scoop these things ______ three red bags.",
+                    answer: "into"
                 },
                 {
                     id: "brit-3",
                     label: "Specimen 03",
-                    subtitle: "Spontaneous Speech",
-                    audioUrl: "#",
-                    transcript: "Actually, I thought the schedule was completely different from what you'd said.",
-                    analysis: "• <b>Schedule</b>: Pronounced /ˈʃɛdjuːl/ — the RP norm, contrasting with American /ˈskɛdʒuːl/.<br>• <b>Thought vowel</b>: /θɔːt/ — back rounded, distinct from GA's merged /θɑːt/.<br>• <b>Reduced auxiliaries</b>: 'you'd' /jəd/ — rapid reduction typical of fluent speech.<br>• <b>Stress-timed rhythm</b>: Content words receive stress; function words compress.",
-                    quizText: "I thought the ___ was completely different.",
-                    answer: "schedule"
+                    subtitle: "Male Speaker, Age 37 — Glasgow, Scotland",
+                    audioUrl: "audio/british_sp03.mp3",
+                    transcript: STELLA,
+                    analysis: `• <b>Glottalization</b>: /t/ realized as glottal stop [ʔ], e.g., "into" [ɪnʔə], "meet" [miːʔ].<br>• <b>L-vocalization</b>: Post-vocalic dark /l/ becomes a vowel-like sound [ʊ], e.g., "small" [smɔːʊ].<br>• <b>Non-rhoticity with Scottish influence</b>: Post-vocalic /r/ is absent while retaining characteristic prosody.`,
+                    quizText: "We also need a ______ plastic snake and a big toy frog for the kids.",
+                    answer: "small"
                 }
             ]
         },
@@ -242,121 +245,161 @@
             id: "american",
             tag: "North America",
             name: "American English",
-            desc: "The dominant variety in global media, technology, and popular culture. General American is widely encountered by EFL learners worldwide and offers a distinct set of phonetic features worth studying.",
+            desc: "American English, spoken across North America, is one of the most influential English varieties globally due to US media, technology, and cultural exports. Characterized by rhoticity, flapped /t/, and distinct vowel mergers, it serves as a primary model for English learners worldwide.",
             specimens: [
                 {
                     id: "am-1",
                     label: "Specimen 01",
-                    subtitle: "Casual Conversation",
-                    audioUrl: "#",
-                    transcript: "I'm planning to visit the city center later this afternoon.",
-                    analysis: "• <b>Rhoticity</b>: /r/ is fully pronounced in all positions — 'later' /ˈleɪtər/, 'center' /ˈsɛntər/.<br>• <b>Flapped /t/</b>: Between vowels, /t/ becomes a voiced flap [ɾ] — 'city' sounds like 'siddy'.<br>• <b>TRAP–BATH merger</b>: Both use the flat /æ/ — no split as in RP.<br>• <b>Cot–Caught merger</b>: Many speakers merge these two vowel classes into /ɑ/.",
-                    quizText: "I'm planning to visit the ___ center later.",
-                    answer: "city"
+                    subtitle: "Male Speaker, Age 62 — Fairfax, Virginia",
+                    audioUrl: "audio/american_sp01.mp3",
+                    transcript: STELLA,
+                    analysis: `• <b>Rhoticity</b>: /r/ is pronounced in all positions, including post-vocalic environments like "store" /stɔr/ and "her" /hɜr/.<br>• <b>Flapping</b>: Intervocalic /t/ and /d/ become alveolar flap [ɾ] in words like "Stella" [ˈstɛɾə] and "station" [ˈsteɪʃən].<br>• <b>Vowel raising</b>: /æ/ raises to [eə] before nasals, e.g., "snack" [sneək], "can" [keən].<br>• <b>T-glottalization</b>: /t/ may become glottal stop [ʔ] before syllabic nasal, e.g., "station" [ˈsteɪʃən].`,
+                    quizText: "Please call Stella. Ask her to bring these things with her from the ______.",
+                    answer: "store"
                 },
                 {
                     id: "am-2",
                     label: "Specimen 02",
-                    subtitle: "Informational Register",
-                    audioUrl: "#",
-                    transcript: "The data shows a significant difference between the two groups.",
-                    analysis: "• <b>Data pronunciation</b>: /ˈdeɪtə/ — the first vowel is /eɪ/, common in GA.<br>• <b>Intervocalic flapping</b>: 'data', 'between', 'difference' all feature /t/ → [ɾ] realisation.<br>• <b>Rhotic schwa</b>: Word-final unstressed syllables carry /ər/ — a distinctly American quality.<br>• <b>Primary stress</b>: 'SIGnificant' — penultimate stress mirrors Latinate borrowing patterns.",
-                    quizText: "The data shows a significant ___ between the groups.",
-                    answer: "difference"
+                    subtitle: "Male Speaker, Age 21 — Wise, Virginia",
+                    audioUrl: "audio/american_sp02.mp3",
+                    transcript: STELLA,
+                    analysis: `• <b>Rhoticity</b>: Consistent pronunciation of post-vocalic /r/ in all environments.<br>• <b>Flapping</b>: /t/ flapped to [ɾ] in "Stella" [ˈstɛɾə] and "station" [ˈsteɪʃən].<br>• <b>Vowel shortening</b>: Some vowel reduction in unstressed syllables.<br>• <b>General American vowel system</b>: Cot-caught merger may be present.`,
+                    quizText: "We also need a small plastic ______ and a big toy frog for the kids.",
+                    answer: "snake"
                 },
                 {
                     id: "am-3",
                     label: "Specimen 03",
-                    subtitle: "Narrative Speech",
-                    audioUrl: "#",
-                    transcript: "She told her brother to stop bothering her while she was writing.",
-                    analysis: "• <b>Intervocalic /t/ and /d/</b>: 'brother', 'bothering', 'writing' all feature the flap [ɾ].<br>• <b>L-vocalisation</b>: Word-final /l/ in 'while' may vocalise to a dark [ɫ̩] in connected speech.<br>• <b>Pre-nasal /æ/ raising</b>: Before /n/ and /m/, /æ/ may glide toward /eɪ/ in some dialects.<br>• <b>Discourse intonation</b>: List-like sequence uses level tone before the final fall.",
-                    quizText: "She told her ___ to stop bothering her.",
-                    answer: "brother"
-                }
-            ]
-        },
-        {
-            id: "indian",
-            tag: "South Asia",
-            name: "Indian English",
-            desc: "With hundreds of millions of speakers, Indian English is one of the most widely used varieties in the world. Its unique phonetic profile reflects the rich linguistic landscape of South Asia.",
-            specimens: [
-                {
-                    id: "ind-1",
-                    label: "Specimen 01",
-                    subtitle: "Academic Register",
-                    audioUrl: "#",
-                    transcript: "Please let me know when the report is ready for submission.",
-                    analysis: "• <b>Retroflex consonants</b>: /t/ and /d/ are produced with the tongue tip curled back — a key feature.<br>• <b>Syllable-timed rhythm</b>: Each syllable receives roughly equal duration, unlike English stress-timing.<br>• <b>Vowel monophthongisation</b>: Diphthong /eɪ/ in 'ready' often becomes pure /eː/.<br>• <b>Aspirated stops</b>: Influence from Indian languages produces strongly aspirated /p/, /t/, /k/.",
-                    quizText: "Please let me know when the ___ is ready.",
-                    answer: "report"
-                },
-                {
-                    id: "ind-2",
-                    label: "Specimen 02",
-                    subtitle: "Professional Context",
-                    audioUrl: "#",
-                    transcript: "The project deadline has been extended until the end of next month.",
-                    analysis: "• <b>Dental plosives</b>: English /θ/ is typically realised as /t/ — 'the' → /də/, 'this' → /dɪs/.<br>• <b>Vowel length</b>: Final syllables often lengthened — 'month' /mʌnθː/, giving a deliberate cadence.<br>• <b>Retroflex /r/</b>: /r/ is trilled or tapped rather than approximant as in GA or RP.<br>• <b>Tone-group boundaries</b>: Pauses occur more frequently, reinforcing the syllable-timed impression.",
-                    quizText: "The project ___ has been extended.",
-                    answer: "deadline"
-                },
-                {
-                    id: "ind-3",
-                    label: "Specimen 03",
-                    subtitle: "Informal Exchange",
-                    audioUrl: "#",
-                    transcript: "Isn't it better to discuss this matter with the whole team together?",
-                    analysis: "• <b>Question tags</b>: 'Isn't it?' used as a general-purpose tag regardless of subject — a distinctive feature.<br>• <b>/w/–/v/ variation</b>: Some speakers merge /w/ and /v/, so 'whole' may approach /voʊl/.<br>• <b>Stress placement</b>: Stress may fall on function words ('IS it better') for pragmatic emphasis.<br>• <b>Vowel quality</b>: /ʌ/ in 'discuss' may be realised closer to /ɑ/, reflecting L1 vowel inventory.",
-                    quizText: "Isn't it better to discuss this with the whole ___ together?",
-                    answer: "team"
+                    subtitle: "Female Speaker, Age 37 — Smith Island, Maryland",
+                    audioUrl: "audio/american_sp03.mp3",
+                    transcript: STELLA,
+                    analysis: `• <b>Regional Maryland features</b>: Possible vowel raising and distinctive diphthongs.<br>• <b>Rhoticity</b>: Full /r/ pronunciation in all positions.<br>• <b>Flapping</b>: Intervocalic /t/ flapping present.<br>• <b>Vowel system</b>: Consistent with General American with some regional variations.`,
+                    quizText: "She can scoop these things into three red ______.",
+                    answer: "bags"
                 }
             ]
         },
         {
             id: "chinese",
-            tag: "East Asia",
+            tag: "East Asia — Mainland China",
             name: "Chinese English",
-            desc: "Spoken by the world's largest EFL population, Chinese English is an emerging variety shaped by Mandarin phonology. Recognising its features builds mutual intelligibility and critical self-awareness.",
+            desc: "Chinese mainland English represents one of the largest English-speaking populations in the world, shaped by Mandarin and other Chinese language influences. Characterized by specific phonological patterns including final obstruent devoicing and distinctive vowel modifications, it reflects the growing global role of Chinese English speakers.",
             specimens: [
                 {
                     id: "cn-1",
                     label: "Specimen 01",
-                    subtitle: "Classroom Presentation",
-                    audioUrl: "#",
-                    transcript: "In my opinion, the most important thing is to keep practising every day.",
-                    analysis: "• <b>Final consonant reduction</b>: Mandarin syllable structure (CV) leads to devoicing or deletion of final /d/, /z/, /v/.<br>• <b>Consonant cluster simplification</b>: Clusters like /pr/ in 'practising' may be reduced or split by epenthetic vowels.<br>• <b>TH substitution</b>: /θ/ → /s/ or /f/; /ð/ → /d/ or /z/ — both sounds absent from Mandarin phonology.<br>• <b>Vowel influence</b>: Mandarin tone contours may affect English pitch and vowel duration patterns.",
-                    quizText: "The most important thing is to keep ___ every day.",
-                    answer: "practising"
+                    subtitle: "Female Speaker, Age 25 — Xiamen, Fujian",
+                    audioUrl: "audio/chinese_sp01.mp3",
+                    transcript: STELLA,
+                    analysis: `• <b>Final obstruent devoicing</b>: Voiced consonants become voiceless at word ends, e.g., "please" final /z/ → [s], "things" /z/ → [s].<br>• <b>Interdental fricative to stop</b>: /θ, ð/ become [t, d], e.g., "thick" [tɪk], "with" [wɪt], "the" [də].<br>• <b>Interdental fricative to labial fricative</b>: /θ, ð/ may become [f, v] in some instances.<br>• <b>Vowel raising</b>: /æ/ raises toward [e], e.g., "snack" [snek], "plastic" [ˈplestɪk].<br>• <b>Liquid deletion</b>: /l/ and /r/ may be deleted in consonant clusters, e.g., "please" [pʰiːz], "from" [fɒm].`,
+                    quizText: "Please call Stella. Ask her to bring these ______ with her from the store.",
+                    answer: "things"
                 },
                 {
                     id: "cn-2",
                     label: "Specimen 02",
-                    subtitle: "Informal Conversation",
-                    audioUrl: "#",
-                    transcript: "Actually, I think the weather here is much colder than I expected.",
-                    analysis: "• <b>Discourse marker 'actually'</b>: Frequently used as a sentence-opener, mirroring Mandarin '其实'.<br>• <b>Rhotic /r/</b>: Often produced as a retroflex [ɻ] influenced by Mandarin pinyin 'r', giving a distinctive quality.<br>• <b>Schwa raising</b>: Unstressed schwas in 'expected', 'weather' may be raised to /ɛ/ rather than reduced.<br>• <b>Pitch range</b>: Mandarin tone experience may produce a wider or more level pitch range than in native varieties.",
-                    quizText: "I think the weather is much ___ than I expected.",
-                    answer: "colder"
+                    subtitle: "Female Speaker, Age 29 — Fuzhou, Fujian",
+                    audioUrl: "audio/chinese_sp02.mp3",
+                    transcript: STELLA,
+                    analysis: `• <b>Final obstruent devoicing</b>: Systematic devoicing of final consonants, e.g., "these" /z/ → [s], "bags" /gz/ → [ks].<br>• <b>Interdental fricative to stop</b>: /θ, ð/ consistently become [t, d], e.g., "thick" [tɪk], "brother" [ˈbrʌdər].<br>• <b>Non-aspiration</b>: Voiceless stops /p, t, k/ may lack aspiration, e.g., "please" [pliːz], "train" [treɪn].<br>• <b>Nasal fronting</b>: /ŋ/ may become [n] in some positions.<br>• <b>Glottalization</b>: Final consonants may be replaced by glottal stops.`,
+                    quizText: "Six spoons of fresh snow ______, five thick slabs of blue cheese.",
+                    answer: "peas"
                 },
                 {
                     id: "cn-3",
                     label: "Specimen 03",
-                    subtitle: "Academic Discussion",
-                    audioUrl: "#",
-                    transcript: "The research suggests that students learn better when they feel comfortable.",
-                    analysis: "• <b>Consonant clusters</b>: 'students', 'suggests' — clusters may be reduced or broken by epenthetic vowels.<br>• <b>Word stress</b>: 'REsearch' vs 'reSEARCH' — stress placement may differ from target norms due to L1 transfer.<br>• <b>-ed endings</b>: Past tense endings in 'suggested', 'learned' sometimes realised as an extra syllable /ɛd/.<br>• <b>Rhythm</b>: More syllable-timed output; reduced forms like 'that' /ðət/ may be pronounced fully /ðæt/.",
-                    quizText: "Students learn better when they feel ___.",
-                    answer: "comfortable"
+                    subtitle: "Female Speaker, Age 26 — Shanxi Province",
+                    audioUrl: "audio/chinese_sp03.mp3",
+                    transcript: STELLA,
+                    analysis: `• <b>Final obstruent devoicing</b>: Voiced final consonants become voiceless, e.g., "please" [pliːs], "things" [θɪŋs].<br>• <b>Vowel shortening</b>: Long vowels may be shortened, e.g., "please" [plɪs], "need" [nɪd].<br>• <b>Vowel raising</b>: /æ/ raises to [e], e.g., "snack" [snek], "plastic" [ˈplestɪk].<br>• <b>Consonant insertion</b>: Epenthetic vowels or consonants may be added, e.g., "ask" [æsək].`,
+                    quizText: "We also need a small ______ snake and a big toy frog for the kids.",
+                    answer: "plastic"
+                }
+            ]
+        },
+        {
+            id: "hongkong",
+            tag: "East Asia — Hong Kong, China",
+            name: "Hong Kong English",
+            desc: "Hong Kong English developed under British colonial influence and continues to thrive in this multilingual Special Administrative Region. Characterized by Cantonese substrate influences including final obstruent devoicing, non-aspiration, and vowel modifications, it represents a distinctive Asian English variety with both British and local features.",
+            specimens: [
+                {
+                    id: "hk-1",
+                    label: "Specimen 01",
+                    subtitle: "Male Speaker, Age 18 — Cantonese speaker (onset age 14)",
+                    audioUrl: "audio/hongkong_sp01.mp3",
+                    transcript: STELLA,
+                    analysis: `• <b>Final obstruent devoicing</b>: Systematic devoicing of final consonants, e.g., "please" [pliːs], "these" [diːs], "things" [θɪŋs], "bags" [bæks].<br>• <b>Non-aspiration</b>: Voiceless stops /p, t, k/ produced without aspiration, e.g., "please" [pliːz], "call" [kɔl], "train" [tren].<br>• <b>Vowel lowering</b>: Vowels may be lowered, e.g., "please" [plɪs], "these" [dɪs], "spoons" [spunz] with centralized vowels.`,
+                    quizText: "Six spoons of fresh snow peas, five thick ______ of blue cheese.",
+                    answer: "slabs"
+                },
+                {
+                    id: "hk-2",
+                    label: "Specimen 02",
+                    subtitle: "Female Speaker, Age 21 — Cantonese speaker",
+                    audioUrl: "audio/hongkong_sp02.mp3",
+                    transcript: STELLA,
+                    analysis: `• <b>Final obstruent devoicing</b>: Voiced final consonants become voiceless, e.g., "please" → [pliːs], "of" → [ɔf].<br>• <b>Non-aspiration</b>: Unaspirated voiceless stops in all positions.<br>• <b>Vowel shortening</b>: Long vowels may be shortened, e.g., "please" [plɪs], "snow" [snɒ], "need" [nɪd].<br>• <b>Vowel raising</b>: Some vowels raised, e.g., "call" [kɔl] → [kɒl] or higher.<br>• <b>Vowel backing/fronting</b>: Systematic vowel shifts in multiple environments.`,
+                    quizText: "Please call ______. Ask her to bring these things with her from the store.",
+                    answer: "Stella"
+                },
+                {
+                    id: "hk-3",
+                    label: "Specimen 03",
+                    subtitle: "Female Speaker, Age 22 — Cantonese speaker",
+                    audioUrl: "audio/hongkong_sp03.mp3",
+                    transcript: STELLA,
+                    analysis: `• <b>Final obstruent devoicing</b>: Consistent devoicing of final consonants, e.g., "these" [diːs], "bags" [bæks].<br>• <b>Interdental fricative to stop</b>: /θ, ð/ become [t, d], e.g., "thick" [tɪk], "with" [wɪt], "brother" [ˈbrʌdə].<br>• <b>Interdental fricative to labial fricative</b>: Some instances of /θ, ð/ → [f, v], e.g., "with" [wɪf].<br>• <b>W to labial fricative</b>: /w/ may become [v] or bilabial fricative, e.g., "with" [vɪθ], "we" [vi].<br>• <b>Obstruent deletion</b>: Deletion of consonants in clusters, e.g., "plastic" [ˈpæstɪk] missing /l/, "snake" [sek] missing /n/.`,
+                    quizText: "She can scoop these things into three red ______.",
+                    answer: "bags"
+                }
+            ]
+        },
+        {
+            id: "pakistani",
+            tag: "South Asia — Pakistan",
+            name: "Pakistani English",
+            desc: "Pakistani English, influenced by Urdu and regional languages like Punjabi and Sindhi, is an important South Asian English variety. Features include retroflexion of alveolar consonants, distinctive vowel patterns, and final obstruent devoicing, reflecting the linguistic diversity of Pakistan's multilingual society.",
+            specimens: [
+                {
+                    id: "pk-1",
+                    label: "Specimen 01",
+                    subtitle: "Male Speaker, Age 25 — Karachi (Urdu speaker with Gujarati/Sindhi)",
+                    audioUrl: "audio/pakistani_sp01.mp3",
+                    transcript: STELLA,
+                    analysis: `• <b>Final obstruent devoicing</b>: Voiced final consonants become voiceless, e.g., "please" [pliːs], "these" [diːs], "bags" [bæks].<br>• <b>Vowel shortening</b>: Long vowels may be shortened, e.g., "please" [plɪs], "snow" [snɒ], "cheese" [tʃɪs].<br>• <b>Vowel raising</b>: /æ/ raises to [e], e.g., "snack" [snek], "plastic" [ˈplestɪk].<br>• <b>Vowel lengthening</b>: Some vowels may be lengthened, particularly in stressed positions.<br>• <b>Vowel fronting</b>: Vowels may be fronted in certain environments.`,
+                    quizText: "Please call Stella. Ask her to bring these things with her from the ______.",
+                    answer: "store"
+                },
+                {
+                    id: "pk-2",
+                    label: "Specimen 02",
+                    subtitle: "Male Speaker, Age 22 — Karachi (Urdu speaker with multiple regional languages)",
+                    audioUrl: "audio/pakistani_sp02.mp3",
+                    transcript: STELLA,
+                    analysis: `• <b>Final obstruent devoicing</b>: Systematic devoicing, e.g., "please" → [pliːs], "things" → [θɪŋs].<br>• <b>Interdental fricative to stop</b>: /θ, ð/ become dental stops [t̪, d̪], e.g., "thick" [t̪ɪk], "the" [d̪ə].<br>• <b>W to labial fricative</b>: /w/ may become [v] in some positions, e.g., "with" [vɪθ], "we" [vi].<br>• <b>Retroflexing</b>: Alveolar consonants become retroflex [ʈ, ɖ, ɳ, ɭ, ɽ], influenced by Urdu phonology.<br>• <b>Vowel shortening and raising</b>: Combined vowel modifications.`,
+                    quizText: "Six spoons of fresh snow peas, five thick ______ of blue cheese.",
+                    answer: "slabs"
+                },
+                {
+                    id: "pk-3",
+                    label: "Specimen 03",
+                    subtitle: "Female Speaker, Age 48 — Sialkot (Urdu speaker with Punjabi)",
+                    audioUrl: "audio/pakistani_sp03.mp3",
+                    transcript: STELLA,
+                    analysis: `• <b>Final obstruent devoicing</b>: Consistent final devoicing, e.g., "these" [diːs], "bags" [bæks].<br>• <b>Interdental fricative to stop</b>: /θ, ð/ realized as [t̪, d̪], e.g., "thick" [t̪ɪk], "brother" [ˈbrʌd̪ə].<br>• <b>W to labial fricative</b>: /w/ → [v] in many environments, e.g., "with" [vɪθ], "Wednesday" [ˈvɛnzdeɪ].<br>• <b>Retroflexing</b>: Extensive retroflexion of alveolar consonants, e.g., "Stella" [ˈʂʈeːɭa], "train" [ʈreːn].<br>• <b>Vowel shortening</b>: Systematic reduction of vowel length, e.g., "please" [plɪs], "need" [nɪd].`,
+                    quizText: "She can scoop these things into ______ red bags.",
+                    answer: "three"
                 }
             ]
         }
     ];
 
+    // ─── STATE ───────────────────────────────────────────────────────────────
     let currentAccent = null;
     let currentSpecimen = null;
 
+    // ─── INIT ────────────────────────────────────────────────────────────────
     function init() {
         const grid = document.getElementById('accent-grid');
         accents.forEach(acc => {
@@ -382,7 +425,7 @@
     function buildRatingStars() {
         const stars = document.getElementById('rating-stars');
         stars.innerHTML = '';
-        for(let i = 1; i <= 5; i++) {
+        for (let i = 1; i <= 5; i++) {
             const btn = document.createElement('button');
             btn.textContent = '🌿';
             btn.className = 'text-2xl grayscale hover:grayscale-0';
@@ -394,25 +437,24 @@
         }
     }
 
+    // ─── NAVIGATION ──────────────────────────────────────────────────────────
     function showHome() {
         currentAccent = null;
         currentSpecimen = null;
         document.getElementById('home-view').classList.remove('hidden');
         document.getElementById('specimen-view').classList.add('hidden');
         document.getElementById('detail-view').classList.add('hidden');
-        pauseAudio();
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     }
 
     function showSpecimen(accentId) {
         const acc = accents.find(a => a.id === accentId);
-        if(!acc) return;
+        if (!acc) return;
         currentAccent = acc;
 
         document.getElementById('home-view').classList.add('hidden');
         document.getElementById('specimen-view').classList.remove('hidden');
         document.getElementById('detail-view').classList.add('hidden');
-        pauseAudio();
 
         document.getElementById('sp-tag').innerText = acc.tag;
         document.getElementById('sp-name').innerText = acc.name;
@@ -425,11 +467,11 @@
             row.className = 'glass-card hover-lift rounded-[2rem] p-10 cursor-pointer flex items-center gap-8';
             row.onclick = () => showDetail(acc.id, sp.id);
             row.innerHTML = `
-                <div class="specimen-num select-none">${String(idx+1).padStart(2,'0')}</div>
+                <div class="specimen-num select-none">${String(idx + 1).padStart(2, '0')}</div>
                 <div class="flex-1 min-w-0">
                     <span class="text-[10px] font-bold tracking-[0.3em] uppercase opacity-40">${sp.label}</span>
                     <h4 class="text-2xl font-light mt-2 mb-2 tracking-tight">${sp.subtitle}</h4>
-                    <p class="text-slate-400 font-light text-base leading-relaxed italic truncate">"${sp.transcript}"</p>
+                    <p class="text-slate-400 font-light text-base leading-relaxed italic truncate">"${sp.transcript.substring(0, 80)}…"</p>
                 </div>
                 <div class="text-[10px] font-bold uppercase tracking-widest flex items-center flex-shrink-0" style="color:var(--sage-600)">
                     Open <svg class="w-3 h-3 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -438,7 +480,7 @@
             list.appendChild(row);
         });
 
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     }
 
     function showDetail(accentId, specimenId) {
@@ -458,20 +500,42 @@
         document.getElementById('det-transcript').innerText = `"${sp.transcript}"`;
         document.getElementById('det-analysis').innerHTML = sp.analysis;
         document.getElementById('det-quiz-text').innerText = sp.quizText;
-        document.getElementById('det-audio').src = sp.audioUrl;
         document.getElementById('quiz-input').value = '';
         document.getElementById('quiz-feedback').classList.add('hidden');
         document.getElementById('rating-feedback').style.opacity = '0';
 
+        // Audio — if it's a GMU link, show a link button; if it's a real file, show player
+        const wrap = document.getElementById('det-audio-wrap');
+        if (sp.audioUrl && sp.audioUrl !== '#') {
+            if (sp.audioUrl.startsWith('http')) {
+                wrap.innerHTML = `
+                    <a href="${sp.audioUrl}" target="_blank" rel="noopener"
+                        class="inline-flex items-center gap-3 px-6 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition text-white"
+                        style="background:var(--sage-600)"
+                        onmouseover="this.style.background='var(--sage-900)'"
+                        onmouseout="this.style.background='var(--sage-600)'">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        Listen on IDEA Archive
+                    </a>
+                    <p class="mt-3 text-xs opacity-40">Opens the George Mason University Speech Accent Archive</p>
+                `;
+            } else {
+                wrap.innerHTML = `<audio controls class="w-full" src="${sp.audioUrl}"></audio>`;
+            }
+        } else {
+            wrap.innerHTML = `<p class="text-sm opacity-30 italic">Audio file not yet available.</p>`;
+        }
+
         setMode('learner');
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     }
 
     function backToSpecimen() {
-        if(currentAccent) showSpecimen(currentAccent.id);
+        if (currentAccent) showSpecimen(currentAccent.id);
         else showHome();
     }
 
+    // ─── UI ──────────────────────────────────────────────────────────────────
     function setMode(mode) {
         const isLinguist = mode === 'linguist';
         document.getElementById('linguist-content').classList.toggle('hidden', !isLinguist);
@@ -485,7 +549,7 @@
         const input = document.getElementById('quiz-input').value.trim().toLowerCase();
         const feedback = document.getElementById('quiz-feedback');
         feedback.classList.remove('hidden');
-        if(input === currentSpecimen.answer.toLowerCase()) {
+        if (input === currentSpecimen.answer.toLowerCase()) {
             feedback.innerText = "✓ Correct Response";
             feedback.style.color = "#5f7a61";
         } else {
@@ -505,11 +569,6 @@
         const fb = document.getElementById('rating-feedback');
         fb.textContent = `Rated ${val}/5 — Thank you`;
         fb.style.opacity = '1';
-    }
-
-    function pauseAudio() {
-        const a = document.getElementById('det-audio');
-        if(a) { try { a.pause(); } catch(e){} }
     }
 
     init();
