@@ -120,8 +120,11 @@
 
         <!-- VIEW 2: SPECIMEN LIST -->
         <div id="specimen-view" class="hidden">
-            <button onclick="showHome()" class="flex items-center text-[10px] font-bold tracking-widest uppercase opacity-40 hover:opacity-100 transition mb-16">
-                <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            <button onclick="showHome()" class="inline-flex items-center gap-3 px-6 py-3 rounded-2xl mb-16 font-bold text-sm tracking-wide transition"
+                style="background:rgba(95,122,97,0.1);color:var(--sage-900)"
+                onmouseover="this.style.background='rgba(95,122,97,0.2)'"
+                onmouseout="this.style.background='rgba(95,122,97,0.1)'">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
                 Back to Collection
             </button>
             <header class="mb-20">
@@ -134,62 +137,114 @@
 
         <!-- VIEW 3: DETAIL -->
         <div id="detail-view" class="hidden">
-            <div class="flex items-center gap-6 mb-16 flex-wrap">
-                <button onclick="backToSpecimen()" class="flex items-center text-[10px] font-bold tracking-widest uppercase opacity-40 hover:opacity-100 transition">
-                    <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            <div class="flex items-center gap-4 mb-16 flex-wrap">
+                <button onclick="backToSpecimen()" class="inline-flex items-center gap-3 px-6 py-3 rounded-2xl font-bold text-sm tracking-wide transition"
+                    style="background:rgba(95,122,97,0.1);color:var(--sage-900)"
+                    onmouseover="this.style.background='rgba(95,122,97,0.2)'"
+                    onmouseout="this.style.background='rgba(95,122,97,0.1)'">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
                     Back to Specimens
                 </button>
                 <span class="opacity-20">·</span>
-                <span id="det-breadcrumb" class="text-[10px] font-bold tracking-widest uppercase opacity-30"></span>
+                <span id="det-breadcrumb" class="text-sm font-light opacity-40"></span>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-20">
                 <div class="lg:col-span-7 space-y-16">
                     <header>
-                        <span id="det-tag" class="text-[10px] font-bold tracking-[0.4em] uppercase" style="color:var(--sage-600)"></span>
-                        <p id="det-label" class="text-sm font-light opacity-40 mt-2 mb-1 tracking-widest uppercase"></p>
-                        <h2 id="det-name" class="text-5xl md:text-6xl font-light mt-2 mb-10 tracking-tighter"></h2>
-                        <div class="inline-flex p-1 rounded-full" style="background:rgba(95,122,97,0.08)">
-                            <button id="btn-learner" onclick="setMode('learner')" class="px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition btn-toggle-active">Learner</button>
-                            <button id="btn-linguist" onclick="setMode('linguist')" class="px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition opacity-50">Linguist</button>
+                        <span id="det-tag" class="text-xs font-bold tracking-[0.4em] uppercase" style="color:var(--sage-600)"></span>
+                        <p id="det-label" class="text-sm font-medium opacity-40 mt-2 mb-1 tracking-widest uppercase"></p>
+                        <h2 id="det-name" class="text-4xl md:text-5xl font-light mt-2 mb-10 tracking-tight leading-snug"></h2>
+
+                        <!-- Learner / Linguist toggle — redesigned -->
+                        <div>
+                            <p class="text-xs font-bold tracking-widest uppercase mb-3" style="color:var(--sage-600);opacity:0.6;">Select your view</p>
+                            <div class="inline-flex p-1 rounded-2xl gap-1" style="background:rgba(95,122,97,0.08)">
+                                <button id="btn-learner" onclick="setMode('learner')"
+                                    class="px-7 py-3 rounded-xl text-sm font-semibold tracking-wide transition btn-toggle-active">
+                                    🎧 Learner Mode
+                                </button>
+                                <button id="btn-linguist" onclick="setMode('linguist')"
+                                    class="px-7 py-3 rounded-xl text-sm font-semibold tracking-wide transition opacity-50">
+                                    🔬 Linguist Mode
+                                </button>
+                            </div>
+                            <p id="mode-hint" class="text-xs mt-3 font-light opacity-40">Listen and practise. Switch to Linguist Mode for phonetic analysis.</p>
                         </div>
                     </header>
 
-                    <div class="glass-card rounded-[2.5rem] p-12 space-y-12">
+                    <div class="glass-card rounded-[2.5rem] p-12 space-y-10">
+
+                        <!-- Audio -->
                         <section>
-                            <label class="text-[10px] font-bold tracking-widest uppercase opacity-30 mb-6 block">Audio Specimen</label>
+                            <div class="flex items-center gap-2 mb-5">
+                                <span class="w-2 h-2 rounded-full" style="background:var(--sage-600)"></span>
+                                <label class="text-sm font-semibold tracking-wide uppercase" style="color:var(--sage-600)">Audio Specimen</label>
+                            </div>
                             <div id="det-audio-wrap"></div>
                         </section>
-                        <section>
-                            <label class="text-[10px] font-bold tracking-widest uppercase opacity-30 mb-6 block">Transcription</label>
-                            <p id="det-transcript" class="text-2xl md:text-3xl font-light italic leading-tight"></p>
+
+                        <!-- Collapsible Transcript — redesigned -->
+                        <section class="border-t pt-8" style="border-color:var(--sage-100)">
+                            <button onclick="toggleTranscript()" id="transcript-toggle"
+                                class="w-full flex items-center justify-between gap-4 px-5 py-4 rounded-2xl transition"
+                                style="background:rgba(95,122,97,0.07)"
+                                onmouseover="this.style.background='rgba(95,122,97,0.14)'"
+                                onmouseout="this.style.background='rgba(95,122,97,0.07)'">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-lg">📄</span>
+                                    <div class="text-left">
+                                        <p id="transcript-label-main" class="text-sm font-bold tracking-wide" style="color:var(--sage-900)">Transcription</p>
+                                        <p id="transcript-label-sub" class="text-xs font-light opacity-50 mt-0.5">Tap to reveal after listening</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2 flex-shrink-0">
+                                    <span id="transcript-status-badge" class="text-xs font-bold px-3 py-1 rounded-full" style="background:rgba(95,122,97,0.12);color:var(--sage-600)">Hidden</span>
+                                    <svg id="transcript-chevron" class="w-5 h-5 transition-transform duration-300" style="color:var(--sage-600);opacity:0.6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                                </div>
+                            </button>
+                            <div id="transcript-body" class="hidden mt-6 px-2">
+                                <p id="det-transcript" class="text-lg md:text-xl font-light italic leading-relaxed" style="color:var(--sage-900);opacity:0.85"></p>
+                            </div>
                         </section>
-                        <section id="linguist-content" class="hidden border-t pt-10" style="border-color:var(--sage-100)">
-                            <label class="text-[10px] font-bold tracking-widest uppercase mb-6 block" style="color:var(--sage-600)">Phonetic Analysis</label>
-                            <div id="det-analysis" class="text-lg font-light leading-relaxed space-y-4"></div>
+
+                        <!-- Phonetic Analysis (Linguist mode) -->
+                        <section id="linguist-content" class="hidden border-t pt-8" style="border-color:var(--sage-100)">
+                            <div class="flex items-center gap-2 mb-6">
+                                <span class="w-2 h-2 rounded-full" style="background:var(--sage-600)"></span>
+                                <label class="text-sm font-semibold tracking-wide uppercase" style="color:var(--sage-600)">Phonetic Analysis</label>
+                            </div>
+                            <div id="det-analysis" class="text-base font-light leading-relaxed space-y-3"></div>
                         </section>
                     </div>
                 </div>
 
                 <div class="lg:col-span-5">
-                    <div class="glass-card rounded-[2.5rem] p-12 sticky top-40 space-y-12">
+                    <div class="glass-card rounded-[2.5rem] p-12 sticky top-40 space-y-10">
                         <div>
-                            <label class="text-[10px] font-bold tracking-widest uppercase opacity-30 mb-10 block">Gap-Fill Exercise</label>
-                            <p id="det-quiz-text" class="text-xl mb-8 leading-relaxed"></p>
-                            <input type="text" id="quiz-input" placeholder="Type missing word..."
+                            <div class="flex items-center gap-2 mb-6">
+                                <span class="w-2 h-2 rounded-full" style="background:var(--sage-600)"></span>
+                                <label class="text-sm font-semibold tracking-wide uppercase" style="color:var(--sage-600)">Gap-Fill Exercise</label>
+                            </div>
+                            <p id="det-quiz-text" class="text-lg mb-8 leading-relaxed font-light"></p>
+                            <input type="text" id="quiz-input" placeholder="Type the missing word…"
                                 class="w-full bg-transparent py-4 focus:outline-none text-xl font-light"
-                                style="border-bottom:1px solid var(--sage-200)"
+                                style="border-bottom:2px solid var(--sage-200)"
                                 onkeydown="if(event.key==='Enter') checkQuiz()">
-                            <button onclick="checkQuiz()" class="mt-8 w-full py-5 text-white text-[10px] font-bold uppercase tracking-[0.3em] rounded-2xl transition"
+                            <button onclick="checkQuiz()" class="mt-8 w-full py-4 text-white text-sm font-bold uppercase tracking-widest rounded-2xl transition"
                                 style="background:var(--sage-900)"
                                 onmouseover="this.style.background='var(--sage-600)'"
-                                onmouseout="this.style.background='var(--sage-900)'">Verify</button>
-                            <p id="quiz-feedback" class="mt-6 text-[10px] font-bold uppercase tracking-widest hidden"></p>
+                                onmouseout="this.style.background='var(--sage-900)'">Verify Answer</button>
+                            <p id="quiz-feedback" class="mt-5 text-sm font-bold tracking-wide hidden"></p>
                         </div>
-                        <div class="pt-10 text-center" style="border-top:1px solid var(--sage-100)">
-                            <label class="text-[10px] font-bold tracking-widest uppercase opacity-30 mb-6 block">Intelligibility Rating</label>
+                        <div class="pt-8 text-center" style="border-top:1px solid var(--sage-100)">
+                            <div class="flex items-center justify-center gap-2 mb-4">
+                                <span class="w-2 h-2 rounded-full" style="background:var(--sage-600)"></span>
+                                <label class="text-sm font-semibold tracking-wide uppercase" style="color:var(--sage-600)">Intelligibility Rating</label>
+                            </div>
+                            <p class="text-xs font-light opacity-40 mb-5">How easy was this accent to understand?</p>
                             <div class="flex justify-center space-x-3" id="rating-stars"></div>
-                            <p id="rating-feedback" class="mt-4 text-[10px] font-bold uppercase tracking-widest" style="color:var(--sage-600);opacity:0;transition:opacity 0.3s;">Rating Recorded</p>
+                            <p id="rating-feedback" class="mt-4 text-sm font-semibold tracking-wide" style="color:var(--sage-600);opacity:0;transition:opacity 0.3s;">Rating Recorded ✓</p>
                         </div>
                     </div>
                 </div>
@@ -212,30 +267,30 @@
                 {
                     id: "brit-1",
                     label: "Specimen 01",
-                    subtitle: "Male Speaker, Age 27 — Littlehampton, UK",
+                    subtitle: "Read Speech — Male Speaker, Age 27 (Littlehampton, UK)",
                     audioUrl: "audio/british_sp01.mp3",
                     transcript: STELLA,
-                    analysis: `• <b>Glottalization</b>: Intervocalic /t/ is realized as a glottal stop [ʔ], e.g., "into" [ɪnʔə], "meet" [miːʔ].<br>• <b>Non-rhoticity (r-deletion)</b>: Post-vocalic /r/ is deleted, e.g., "her" [hɜː], "store" [stɔː].<br>• <b>Consonant cluster simplification</b>: Final clusters are often reduced in connected speech.`,
+                    analysis: `• <b>Glottalization</b>: Intervocalic /t/ realised as glottal stop [ʔ], e.g., "into" [ɪnʔə], "meet" [miːʔ]. Chinese learners often hear it as "in-o" or "me".<br>• <b>Non-rhoticity</b>: Post-vocalic /r/ deleted, e.g., "her" [hɜː], "store" [stɔː]. This makes word boundaries unclear for Chinese listeners.<br>• <b>Dark /l/ vocalisation</b>: "small" → [smɔːʊ]. The /l/ becomes vowel-like, often misheard as "smore".<br>• <b>Connected speech reduction</b>: "these things" → rapid blending, common in British English.<br>• <b>Short vowel in BATH words</b>: "ask" remains short [æsk].`,
                     quizText: "Please call Stella. Ask her to bring these things with her from the ______.",
                     answer: "store"
                 },
                 {
                     id: "brit-2",
                     label: "Specimen 02",
-                    subtitle: "Female Speaker, Age 30 — Birmingham, UK",
+                    subtitle: "Read Speech — Female Speaker, Age 30 (Birmingham, UK)",
                     audioUrl: "audio/british_sp02.mp3",
                     transcript: STELLA,
-                    analysis: `• <b>Glottalization</b>: /t/ becomes [ʔ] in medial position, e.g., "plastic" [ˈplæsʔɪk], "into" [ɪnʔə].<br>• <b>Non-rhoticity (r-deletion)</b>: Post-vocalic /r/ is not pronounced, e.g., "her" [hɜː], "store" [stɔː].<br>• <b>Vowel shortening (BATH words)</b>: /æ/ remains short in words like "ask" [æsk], typical of Midlands English.`,
+                    analysis: `• <b>Glottalization</b>: /t/ realised as [ʔ], e.g., "plastic" [ˈplæsʔɪk], "into" [ɪnʔə]. Chinese learners often miss the /t/ entirely.<br>• <b>Non-rhoticity</b>: Post-vocalic /r/ deleted, e.g., "her" [hɜː], "store" [stɔː].<br>• <b>Vowel shortening (BATH words)</b>: "ask" → short [æsk] (Midlands feature). Learners tend to use long [ɑːsk].<br>• <b>Rapid connected speech</b>: "these things" and "red bags" show cluster reduction.<br>• <b>Weak vowel in unstressed syllables</b>: "her" and "for" reduced to schwa-like sounds.`,
                     quizText: "She can scoop these things ______ three red bags.",
                     answer: "into"
                 },
                 {
                     id: "brit-3",
                     label: "Specimen 03",
-                    subtitle: "Male Speaker, Age 37 — Glasgow, Scotland",
+                    subtitle: "Read Speech — Male Speaker, Age 37 (Glasgow, Scotland, UK)",
                     audioUrl: "audio/british_sp03.mp3",
                     transcript: STELLA,
-                    analysis: `• <b>Glottalization</b>: /t/ realized as glottal stop [ʔ], e.g., "into" [ɪnʔə], "meet" [miːʔ].<br>• <b>L-vocalization</b>: Post-vocalic dark /l/ becomes a vowel-like sound [ʊ], e.g., "small" [smɔːʊ].<br>• <b>Non-rhoticity with Scottish influence</b>: Post-vocalic /r/ is absent while retaining characteristic prosody.`,
+                    analysis: `• <b>Glottalization</b>: /t/ as glottal stop [ʔ], e.g., "into" [ɪnʔə], "meet" [miːʔ].<br>• <b>L-vocalization</b>: "small" → [smɔːʊ]. Dark /l/ becomes vowel-like, frequently misheard by Chinese learners.<br>• <b>Non-rhoticity with Scottish prosody</b>: Post-vocalic /r/ deleted (e.g., "her", "store").<br>• <b>Consonant cluster simplification</b>: "these things" and "red bags" show reduction.<br>• <b>Vowel quality</b>: "Stella" and "Wednesday" show typical Scottish-influenced realisation.`,
                     quizText: "We also need a ______ plastic snake and a big toy frog for the kids.",
                     answer: "small"
                 }
@@ -260,22 +315,22 @@
                 {
                     id: "am-2",
                     label: "Specimen 02",
-                    subtitle: "Male Speaker, Age 21 — Wise, Virginia",
+                    subtitle: "Read Speech — Female Speaker, Age 45 (Brooklyn, New York)",
                     audioUrl: "audio/american_sp02.mp3",
                     transcript: STELLA,
-                    analysis: `• <b>Rhoticity</b>: Consistent pronunciation of post-vocalic /r/ in all environments.<br>• <b>Flapping</b>: /t/ flapped to [ɾ] in "Stella" [ˈstɛɾə] and "station" [ˈsteɪʃən].<br>• <b>Vowel shortening</b>: Some vowel reduction in unstressed syllables.<br>• <b>General American vowel system</b>: Cot-caught merger may be present.`,
-                    quizText: "We also need a small plastic ______ and a big toy frog for the kids.",
-                    answer: "snake"
+                    analysis: `• <b>Non-rhoticity (NYC feature)</b>: Post-vocalic /r/ is deleted, e.g., "store" [stɔə], "her" [hə], "brother" [bʌðə].<br>• <b>TH-fronting / dental fricative weakening</b>: Interdental fricatives may be realized as dental stops or fricatives, e.g., "with" [wɪð], "the" [ðə].<br>• <b>Vowel nasalization</b>: Vowels preceding nasal consonants become nasalized, e.g., "can" [kʰɜ̃n], "Wednesday" [wɛ̃nzdə], "train" [tæ̃n].<br>• <b>NYC short-a split system</b>: The vowel /æ/ raises and tenses in certain environments, e.g., "bag" may show raised quality.<br>• <b>Flapping</b>: Intervocalic /t/ and /d/ become alveolar flap [ɾ] in words like "Stella" and "station".`,
+                    quizText: "Please call Stella. Ask her to bring these things with her from the ______.",
+                    answer: "store"
                 },
                 {
                     id: "am-3",
                     label: "Specimen 03",
-                    subtitle: "Female Speaker, Age 37 — Smith Island, Maryland",
+                    subtitle: "Read Speech — Female Speaker, Age 27 (Mt. Holly, North Carolina)",
                     audioUrl: "audio/american_sp03.mp3",
                     transcript: STELLA,
-                    analysis: `• <b>Regional Maryland features</b>: Possible vowel raising and distinctive diphthongs.<br>• <b>Rhoticity</b>: Full /r/ pronunciation in all positions.<br>• <b>Flapping</b>: Intervocalic /t/ flapping present.<br>• <b>Vowel system</b>: Consistent with General American with some regional variations.`,
-                    quizText: "She can scoop these things into three red ______.",
-                    answer: "bags"
+                    analysis: `• <b>Rhoticity (Southern US feature)</b>: /r/ is pronounced in all positions, e.g., "store" [stoʊl] (with possible /l/ insertion), "her" [hɛr].<br>• <b>Southern Vowel Shift</b>: Front vowels are lowered and centralized, e.g., "please" [pʰɪs], "Stella" [ˈsteɪlə], "six" [sɪks].<br>• <b>TH-stopping</b>: Interdental fricatives /θ, ð/ become stops [t, d] or fricatives, e.g., "with" [wʊð], "things" [ðiŋəs], "brother" [brʌðə].<br>• <b>Lax vowel reduction</b>: Unstressed vowels are reduced to schwa or near-schwa, e.g., "bring" [bæŋ], "plastic" [plæstɪk].<br>• <b>Pin-pen merger (likely)</b>: Vowels /ɪ/ and /ɛ/ merge before nasals, e.g., "pin" and "pen" sound similar.`,
+                    quizText: "Six spoons of fresh snow ______, five thick slabs of blue cheese.",
+                    answer: "peas"
                 }
             ]
         },
@@ -289,7 +344,7 @@
                     id: "cn-1",
                     label: "Specimen 01",
                     subtitle: "Female Speaker, Age 25 — Xiamen, Fujian",
-                    audioUrl: "audio/chinese_sp01.mp3",
+                    audioUrl: "https://accent.gmu.edu/browse_language.php?function=detail&speakerid=505&menu=liquiddeletion",
                     transcript: STELLA,
                     analysis: `• <b>Final obstruent devoicing</b>: Voiced consonants become voiceless at word ends, e.g., "please" final /z/ → [s], "things" /z/ → [s].<br>• <b>Interdental fricative to stop</b>: /θ, ð/ become [t, d], e.g., "thick" [tɪk], "with" [wɪt], "the" [də].<br>• <b>Interdental fricative to labial fricative</b>: /θ, ð/ may become [f, v] in some instances.<br>• <b>Vowel raising</b>: /æ/ raises toward [e], e.g., "snack" [snek], "plastic" [ˈplestɪk].<br>• <b>Liquid deletion</b>: /l/ and /r/ may be deleted in consonant clusters, e.g., "please" [pʰiːz], "from" [fɒm].`,
                     quizText: "Please call Stella. Ask her to bring these ______ with her from the store.",
@@ -299,7 +354,7 @@
                     id: "cn-2",
                     label: "Specimen 02",
                     subtitle: "Female Speaker, Age 29 — Fuzhou, Fujian",
-                    audioUrl: "audio/chinese_sp02.mp3",
+                    audioUrl: "https://accent.gmu.edu/browse_language.php?function=detail&speakerid=48&menu=liquiddeletion",
                     transcript: STELLA,
                     analysis: `• <b>Final obstruent devoicing</b>: Systematic devoicing of final consonants, e.g., "these" /z/ → [s], "bags" /gz/ → [ks].<br>• <b>Interdental fricative to stop</b>: /θ, ð/ consistently become [t, d], e.g., "thick" [tɪk], "brother" [ˈbrʌdər].<br>• <b>Non-aspiration</b>: Voiceless stops /p, t, k/ may lack aspiration, e.g., "please" [pliːz], "train" [treɪn].<br>• <b>Nasal fronting</b>: /ŋ/ may become [n] in some positions.<br>• <b>Glottalization</b>: Final consonants may be replaced by glottal stops.`,
                     quizText: "Six spoons of fresh snow ______, five thick slabs of blue cheese.",
@@ -309,7 +364,7 @@
                     id: "cn-3",
                     label: "Specimen 03",
                     subtitle: "Female Speaker, Age 26 — Shanxi Province",
-                    audioUrl: "audio/chinese_sp03.mp3",
+                    audioUrl: "https://accent.gmu.edu/browse_language.php?function=detail&speakerid=256&menu=consonantinsertion",
                     transcript: STELLA,
                     analysis: `• <b>Final obstruent devoicing</b>: Voiced final consonants become voiceless, e.g., "please" [pliːs], "things" [θɪŋs].<br>• <b>Vowel shortening</b>: Long vowels may be shortened, e.g., "please" [plɪs], "need" [nɪd].<br>• <b>Vowel raising</b>: /æ/ raises to [e], e.g., "snack" [snek], "plastic" [ˈplestɪk].<br>• <b>Consonant insertion</b>: Epenthetic vowels or consonants may be added, e.g., "ask" [æsək].`,
                     quizText: "We also need a small ______ snake and a big toy frog for the kids.",
@@ -327,7 +382,7 @@
                     id: "hk-1",
                     label: "Specimen 01",
                     subtitle: "Male Speaker, Age 18 — Cantonese speaker (onset age 14)",
-                    audioUrl: "audio/hongkong_sp01.mp3",
+                    audioUrl: "https://accent.gmu.edu/browse_language.php?function=detail&speakerid=49",
                     transcript: STELLA,
                     analysis: `• <b>Final obstruent devoicing</b>: Systematic devoicing of final consonants, e.g., "please" [pliːs], "these" [diːs], "things" [θɪŋs], "bags" [bæks].<br>• <b>Non-aspiration</b>: Voiceless stops /p, t, k/ produced without aspiration, e.g., "please" [pliːz], "call" [kɔl], "train" [tren].<br>• <b>Vowel lowering</b>: Vowels may be lowered, e.g., "please" [plɪs], "these" [dɪs], "spoons" [spunz] with centralized vowels.`,
                     quizText: "Six spoons of fresh snow peas, five thick ______ of blue cheese.",
@@ -337,7 +392,7 @@
                     id: "hk-2",
                     label: "Specimen 02",
                     subtitle: "Female Speaker, Age 21 — Cantonese speaker",
-                    audioUrl: "audio/hongkong_sp02.mp3",
+                    audioUrl: "https://accent.gmu.edu/browse_language.php?function=detail&speakerid=730&menu=liquiddeletion",
                     transcript: STELLA,
                     analysis: `• <b>Final obstruent devoicing</b>: Voiced final consonants become voiceless, e.g., "please" → [pliːs], "of" → [ɔf].<br>• <b>Non-aspiration</b>: Unaspirated voiceless stops in all positions.<br>• <b>Vowel shortening</b>: Long vowels may be shortened, e.g., "please" [plɪs], "snow" [snɒ], "need" [nɪd].<br>• <b>Vowel raising</b>: Some vowels raised, e.g., "call" [kɔl] → [kɒl] or higher.<br>• <b>Vowel backing/fronting</b>: Systematic vowel shifts in multiple environments.`,
                     quizText: "Please call ______. Ask her to bring these things with her from the store.",
@@ -347,7 +402,7 @@
                     id: "hk-3",
                     label: "Specimen 03",
                     subtitle: "Female Speaker, Age 22 — Cantonese speaker",
-                    audioUrl: "audio/hongkong_sp03.mp3",
+                    audioUrl: "https://accent.gmu.edu/browse_language.php?function=detail&speakerid=45&menu=obstruentdeletion",
                     transcript: STELLA,
                     analysis: `• <b>Final obstruent devoicing</b>: Consistent devoicing of final consonants, e.g., "these" [diːs], "bags" [bæks].<br>• <b>Interdental fricative to stop</b>: /θ, ð/ become [t, d], e.g., "thick" [tɪk], "with" [wɪt], "brother" [ˈbrʌdə].<br>• <b>Interdental fricative to labial fricative</b>: Some instances of /θ, ð/ → [f, v], e.g., "with" [wɪf].<br>• <b>W to labial fricative</b>: /w/ may become [v] or bilabial fricative, e.g., "with" [vɪθ], "we" [vi].<br>• <b>Obstruent deletion</b>: Deletion of consonants in clusters, e.g., "plastic" [ˈpæstɪk] missing /l/, "snake" [sek] missing /n/.`,
                     quizText: "She can scoop these things into three red ______.",
@@ -365,7 +420,7 @@
                     id: "pk-1",
                     label: "Specimen 01",
                     subtitle: "Male Speaker, Age 25 — Karachi (Urdu speaker with Gujarati/Sindhi)",
-                    audioUrl: "audio/pakistani_sp01.mp3",
+                    audioUrl: "https://accent.gmu.edu/browse_language.php?function=detail&speakerid=423&menu=fronting",
                     transcript: STELLA,
                     analysis: `• <b>Final obstruent devoicing</b>: Voiced final consonants become voiceless, e.g., "please" [pliːs], "these" [diːs], "bags" [bæks].<br>• <b>Vowel shortening</b>: Long vowels may be shortened, e.g., "please" [plɪs], "snow" [snɒ], "cheese" [tʃɪs].<br>• <b>Vowel raising</b>: /æ/ raises to [e], e.g., "snack" [snek], "plastic" [ˈplestɪk].<br>• <b>Vowel lengthening</b>: Some vowels may be lengthened, particularly in stressed positions.<br>• <b>Vowel fronting</b>: Vowels may be fronted in certain environments.`,
                     quizText: "Please call Stella. Ask her to bring these things with her from the ______.",
@@ -375,7 +430,7 @@
                     id: "pk-2",
                     label: "Specimen 02",
                     subtitle: "Male Speaker, Age 22 — Karachi (Urdu speaker with multiple regional languages)",
-                    audioUrl: "audio/pakistani_sp02.mp3",
+                    audioUrl: "https://accent.gmu.edu/browse_language.php?function=detail&speakerid=390&menu=raising",
                     transcript: STELLA,
                     analysis: `• <b>Final obstruent devoicing</b>: Systematic devoicing, e.g., "please" → [pliːs], "things" → [θɪŋs].<br>• <b>Interdental fricative to stop</b>: /θ, ð/ become dental stops [t̪, d̪], e.g., "thick" [t̪ɪk], "the" [d̪ə].<br>• <b>W to labial fricative</b>: /w/ may become [v] in some positions, e.g., "with" [vɪθ], "we" [vi].<br>• <b>Retroflexing</b>: Alveolar consonants become retroflex [ʈ, ɖ, ɳ, ɭ, ɽ], influenced by Urdu phonology.<br>• <b>Vowel shortening and raising</b>: Combined vowel modifications.`,
                     quizText: "Six spoons of fresh snow peas, five thick ______ of blue cheese.",
@@ -385,7 +440,7 @@
                     id: "pk-3",
                     label: "Specimen 03",
                     subtitle: "Female Speaker, Age 48 — Sialkot (Urdu speaker with Punjabi)",
-                    audioUrl: "audio/pakistani_sp03.mp3",
+                    audioUrl: "https://accent.gmu.edu/browse_language.php?function=detail&speakerid=391&menu=obstruentdeletion",
                     transcript: STELLA,
                     analysis: `• <b>Final obstruent devoicing</b>: Consistent final devoicing, e.g., "these" [diːs], "bags" [bæks].<br>• <b>Interdental fricative to stop</b>: /θ, ð/ realized as [t̪, d̪], e.g., "thick" [t̪ɪk], "brother" [ˈbrʌd̪ə].<br>• <b>W to labial fricative</b>: /w/ → [v] in many environments, e.g., "with" [vɪθ], "Wednesday" [ˈvɛnzdeɪ].<br>• <b>Retroflexing</b>: Extensive retroflexion of alveolar consonants, e.g., "Stella" [ˈʂʈeːɭa], "train" [ʈreːn].<br>• <b>Vowel shortening</b>: Systematic reduction of vowel length, e.g., "please" [plɪs], "need" [nɪd].`,
                     quizText: "She can scoop these things into ______ red bags.",
@@ -504,6 +559,13 @@
         document.getElementById('quiz-feedback').classList.add('hidden');
         document.getElementById('rating-feedback').style.opacity = '0';
 
+        // Reset transcript to collapsed on each new specimen
+        document.getElementById('transcript-body').classList.add('hidden');
+        document.getElementById('transcript-chevron').style.transform = 'rotate(0deg)';
+        document.getElementById('transcript-status-badge').textContent = 'Hidden';
+        document.getElementById('transcript-status-badge').style.background = 'rgba(95,122,97,0.12)';
+        document.getElementById('transcript-label-sub').textContent = 'Tap to reveal after listening';
+
         // Audio — if it's a GMU link, show a link button; if it's a real file, show player
         const wrap = document.getElementById('det-audio-wrap');
         if (sp.audioUrl && sp.audioUrl !== '#') {
@@ -530,6 +592,19 @@
         window.scrollTo(0, 0);
     }
 
+    function toggleTranscript() {
+        const body = document.getElementById('transcript-body');
+        const chevron = document.getElementById('transcript-chevron');
+        const badge = document.getElementById('transcript-status-badge');
+        const sub = document.getElementById('transcript-label-sub');
+        const isHidden = body.classList.contains('hidden');
+        body.classList.toggle('hidden', !isHidden);
+        chevron.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+        badge.textContent = isHidden ? 'Visible' : 'Hidden';
+        badge.style.background = isHidden ? 'rgba(95,122,97,0.2)' : 'rgba(95,122,97,0.12)';
+        sub.textContent = isHidden ? 'Tap to hide' : 'Tap to reveal after listening';
+    }
+
     function backToSpecimen() {
         if (currentAccent) showSpecimen(currentAccent.id);
         else showHome();
@@ -539,10 +614,14 @@
     function setMode(mode) {
         const isLinguist = mode === 'linguist';
         document.getElementById('linguist-content').classList.toggle('hidden', !isLinguist);
-        const on = "px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition btn-toggle-active";
-        const off = "px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition opacity-50";
+        const on = "px-7 py-3 rounded-xl text-sm font-semibold tracking-wide transition btn-toggle-active";
+        const off = "px-7 py-3 rounded-xl text-sm font-semibold tracking-wide transition opacity-50";
         document.getElementById('btn-linguist').className = isLinguist ? on : off;
         document.getElementById('btn-learner').className = !isLinguist ? on : off;
+        const hint = document.getElementById('mode-hint');
+        if (hint) hint.textContent = isLinguist
+            ? 'Phonetic analysis and IPA notation are now visible below.'
+            : 'Listen and practise. Switch to Linguist Mode for phonetic analysis.';
     }
 
     function checkQuiz() {
