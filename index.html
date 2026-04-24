@@ -208,6 +208,15 @@
                             </div>
                         </section>
 
+                        <!-- Suggested notes for learners (Learner mode) -->
+                        <section id="learner-notes-content" class="border-t pt-8" style="border-color:var(--sage-100)">
+                            <div class="flex items-center gap-2 mb-6">
+                                <span class="w-2 h-2 rounded-full" style="background:var(--sage-600)"></span>
+                                <label class="text-sm font-semibold tracking-wide uppercase" style="color:var(--sage-600)">Suggested Notes for Learners</label>
+                            </div>
+                            <div id="det-learner-notes" class="text-base font-light leading-relaxed space-y-3"></div>
+                        </section>
+
                         <!-- Phonetic Analysis (Linguist mode) -->
                         <section id="linguist-content" class="hidden border-t pt-8" style="border-color:var(--sage-100)">
                             <div class="flex items-center gap-2 mb-6">
@@ -262,35 +271,38 @@
             id: "british",
             tag: "United Kingdom",
             name: "British English",
-            desc: "British English, rooted in the United Kingdom and including both Received Pronunciation and regional varieties such as Midlands and Scottish accents, is a major global English variety. Characterized by non-rhotic pronunciation, frequent glottalization of /t/, and distinct vowel qualities that clearly contrast with American English.",
+            desc: "British English, rooted in the United Kingdom and including both Received Pronunciation and regional varieties such as Midlands and Scottish accents, is a major global English variety.",
             specimens: [
                 {
                     id: "brit-1",
                     label: "Specimen 01",
-                    subtitle: "Read Speech — Male Speaker, Age 27 (Littlehampton, UK)",
+                    subtitle: "Male Speaker, Age 27 (Littlehampton, UK)",
                     audioUrl: "audio/british_sp01.mp3",
                     transcript: STELLA,
-                    analysis: `• <b>Non-rhoticity</b>: Post-vocalic /r/ is not pronounced, e.g., "her" [hɜː], "store" [stɔː]. This can make word boundaries less clear for listeners unfamiliar with this feature.<br>• <b>Long vowel in BATH words</b>: "ask" has a long vowel [ɑːsk]. The speaker is from Littlehampton in the south of England, where this pronunciation predominates.<br>• <b>Dark /l/ vocalisation</b>: In words like "small", the dark /l/ becomes vowel-like, which may be heard as something like [smɔːʊ].<br>• <b>Connected speech features</b>: In "the store", "the" may begin with a nasal sound through assimilation to the preceding /m/. Weak forms also occur, such as h-dropping in the first "her" and reduction of "to".`,
+                    learnerNotes: `This speaker is from the south of England.<br><br>Listen to words that have the letter 'r' in the spelling after a vowel letter, such as 'her' and 'store'. You cannot hear an /r/ sound – this is called a 'non-rhotic' accent (American English is usually rhotic and 'r' is pronounced).<br><br>You can hear that he pronounces the word 'ask' with a long vowel sound – this is typical of Southern British English. Speakers from the north of England mainly use a short vowel in these words.`,
+                    analysis: `• <b>Non-rhoticity</b>: Post-vocalic /r/ is not pronounced, e.g., "her" [hɜː], "store" [stɔː]. This can make word boundaries less clear for Chinese listeners.<br>• <b>Long vowel in BATH words</b>: "ask" has a long vowel [ɑːsk]. The speaker is from Littlehampton in the south of England, where this pronunciation predominates.<br>• <b>Connected speech features</b>: In "the store", "the" may begin with a nasal sound through assimilation to the preceding /m/. Weak forms also occur, such as h-dropping in the first "her" and reduction of "to".`,
                     quizText: "Ask her to bring these things with her from the ______.",
                     answer: "store"
                 },
                 {
                     id: "brit-2",
                     label: "Specimen 02",
-                    subtitle: "Read Speech — Female Speaker, Age 30 (Birmingham, UK)",
+                    subtitle: "Female Speaker, Age 30 (Birmingham, UK)",
                     audioUrl: "audio/british_sp02.mp3",
                     transcript: STELLA,
-                    analysis: `• <b>Non-rhoticity</b>: Post-vocalic /r/ is not pronounced, e.g., "her" [hɜː], "store" [stɔː].<br>• <b>Long vowel in BATH words</b>: Although Birmingham is in the Midlands, where BATH words are often short, this speaker uses the Southern-type long vowel, so "ask" is [ɑːsk].<br>• <b>No glottalization in this sample</b>: The IPA transcript does not clearly support /t/ being realised as [ʔ], so glottalization should not be listed as a main feature here.<br>• <b>Rapid connected speech</b>: Phrases such as "these things" and "red bags" show cluster reduction and fast blending in connected speech.<br>• <b>Weak vowels in unstressed syllables</b>: Words such as "her" and "for" are reduced to schwa-like vowels in fluent speech.`,
+                    learnerNotes: `Although this speaker is from Birmingham, in the midlands of England, her accent has many features of Southern British English. You can hear the word 'ask' is pronounced with a long vowel sound.`,
+                    analysis: `• <b>Non-rhoticity</b>: Post-vocalic /r/ is not pronounced, e.g., "her" [hɜː], "store" [stɔː].<br>• <b>Long vowel in BATH words</b>: Although Birmingham is in the Midlands, where BATH words are often short, this speaker uses the Southern-type long vowel, so "ask" is [ɑːsk].<br>• <b>Weak vowels in unstressed syllables</b>: Words such as "her" and "for" are reduced to schwa-like vowels in fluent speech.`,
                     quizText: "We also need a small plastic snake and a big toy frog for the ______.",
                     answer: "kids"
                 },
                 {
                     id: "brit-3",
                     label: "Specimen 03",
-                    subtitle: "Read Speech — Male Speaker, Age 37 (Glasgow, Scotland, UK)",
+                    subtitle: "Male Speaker, Age 37 (Glasgow, Scotland, UK)",
                     audioUrl: "audio/british_sp03.mp3",
                     transcript: STELLA,
-                    analysis: `• <b>Rhoticity</b>: Scottish English is mainly rhotic, so post-vocalic /r/ is pronounced, e.g., in "her" and "store".<br>• <b>Glottalization</b>: /t/ may be realised as a glottal stop [ʔ] in some environments, a well-known feature of Glasgow speech.<br>• <b>Vowel quality</b>: FACE and GOAT vowels are sometimes realised as relatively steady-state monophthongs, rather than strong diphthongs, e.g., in "maybe" and "snow".<br>• <b>Consonant cluster simplification</b>: In fast speech, phrases such as "these things" and "red bags" may show reduction.<br>• <b>Scottish-influenced realisation</b>: Words such as "Stella" and "Wednesday" show Scottish prosodic and segmental colouring.`,
+                    learnerNotes: `This speaker is from Glasgow in Scotland. Although many people believe that the Scottish English accent is hard to understand, this speaker uses Standard Scottish English and is easy to follow. Unlike the Southern British English accent, Scottish English is usually rhotic – can you hear the 'r' sounds in 'store' and 'her'? This makes Scottish English sound more like American English.`,
+                    analysis: `• <b>Rhoticity</b>: Scottish English is mainly rhotic, so post-vocalic /r/ is pronounced.<br>• <b>Vowel quality</b>: FACE and GOAT vowels are sometimes realised as relatively steady-state monophthongs, rather than strong diphthongs, e.g., in "maybe" and "snow".`,
                     quizText: "She can scoop these things into three red ______.",
                     answer: "bags"
                 }
@@ -300,34 +312,37 @@
             id: "american",
             tag: "North America",
             name: "American English",
-            desc: "American English, spoken across North America, is one of the most influential English varieties globally due to US media, technology, and cultural exports. Characterized by rhoticity, flapped /t/, and distinct vowel mergers, it serves as a primary model for English learners worldwide.",
+            desc: "American English, spoken across North America, is one of the most influential English varieties globally due to US media, technology, and cultural exports. Characterized by rhoticity, flapped /t/, and distinct vowel sounds, it serves as a primary model for English learners worldwide.",
             specimens: [
                 {
                     id: "am-1",
                     label: "Specimen 01",
-                    subtitle: "Read Speech — Male Speaker, Age 62 (Fairfax, Virginia — Southern US)",
+                    subtitle: "Male Speaker, Age 62 (Fairfax, Virginia — Southern US)",
                     audioUrl: "audio/american_sp01.mp3",
                     transcript: STELLA,
-                    analysis: `• <b>Rhoticity</b>: The accent is mainly rhotic (post-vocalic /r/ is pronounced), e.g. in "store", but not always (e.g. at the end of "brother").<br>• <b>Vowel features</b>: As in many Southern US accents, PRICE [pɹaːs] is pronounced as a long vowel /a:/, e.g. in "five" [faːv].<br>• <b>Tapping / flapping</b>: Intervocalic /t/ can become an alveolar flap [ɾ], e.g. in "to" of "ask her to bring" [æsk hər ə brɪŋ].`,
+                    learnerNotes: `This speaker is from Virginia and has a Southern American English accent. Listen to the vowel sounds, for example in the word 'five' and 'slab'.`,
+                    analysis: `• <b>Southern American English</b>: This accent is variably non-rhotic. Post-vocalic /r/ is pronounced in "store", but not in "brother".<br>• <b>Vowel features</b>: As in many Southern US accents, PRICE is pronounced as a long vowel /a:/, e.g. in "five" [faːv]. Words such as 'slab' show vowel lengthening.<br>• <b>Tapping / flapping</b>: Intervocalic /t/ can become an alveolar flap [ɾ], e.g. in "to" of "ask her to bring" [æsk hər ə brɪŋ].`,
                     quizText: "Please call Stella. Ask her to bring these things with her from the ______.",
                     answer: "store"
                 },
                 {
                     id: "am-2",
                     label: "Specimen 02",
-                    subtitle: "Read Speech — Female Speaker, Age 45 (Brooklyn, New York)",
+                    subtitle: "Female Speaker, Age 45 (Brooklyn, New York)",
                     audioUrl: "audio/american_sp02.mp3",
                     transcript: STELLA,
-                    analysis: `• <b>Non-rhoticity</b>: New York accents are variably rhotic. This speaker is mainly non-rhotic, e.g. in "store" [stɔə], "her" [hə], "brother" [brʌðə].<br>• <b>Vowel nasalization</b>: Vowels preceding nasal consonants become nasalized, e.g., "can" [kʰɜ̃n], "Wednesday" [wɛ̃nzdə], "train" [træ̃n].<br>• <b>NYC vowel system</b>: The vowel /ɔː/ is pronounced as [ɔə] when followed by an 'r' in the spelling, e.g. in "store" [stɔə].<br>• <b>Flapping</b>: Intervocalic /t/ becomes an alveolar flap [ɾ], e.g. "to" [rə] in connected speech.`,
+                    learnerNotes: `This speaker is from New York. Most American accents are 'rhotic', meaning that you can hear the 'r' sounds in words like 'store'. However, New York English accents are often non-rhotic (listen to 'store' and 'for' – there is no 'r' sound).`,
+                    analysis: `• <b>Non-rhoticity</b>: New York accents are variably rhotic. This speaker is mainly non-rhotic, e.g. in "store" [stɔə], "her" [hə], "brother" [brʌðə].<br>• <b>Vowel nasalization</b>: As in many American English accents, vowels preceding nasal consonants become nasalized, e.g., "can" [ˈkæn], "Wednesday" [ˈwɛnzdeɪ], "train" [ˈtɹeɪn].<br>• <b>NYC vowel system</b>: The vowel /ɔː/ is pronounced as [ɔə] when followed by an 'r' in the spelling, e.g. in "store" [stɔə].<br>• <b>Flapping</b>: Intervocalic /t/ becomes an alveolar flap [ɾ], e.g. "to" [rə] in connected speech.`,
                     quizText: "Please call Stella. Ask her to bring these things with her from the ______.",
                     answer: "store"
                 },
                 {
                     id: "am-3",
                     label: "Specimen 03",
-                    subtitle: "Read Speech — Female Speaker, Age 27 (Mt. Holly, North Carolina)",
+                    subtitle: "Female Speaker, Age 27 (Mt. Holly, North Carolina)",
                     audioUrl: "audio/american_sp03.mp3",
                     transcript: STELLA,
+                    learnerNotes: `This speaker is from North Carolina and her accent has many features of Southern American English. It is a rhotic accent, meaning you can hear the 'r' sound in words like 'store' and 'her'. If you listen to the word 'Wednesday' you can hear another interesting accent feature – the first 'e' sounds more like an 'i'.`,
                     analysis: `• <b>Rhoticity</b>: /r/ is pronounced in all positions, e.g., "store" [stɔːr], "her" [hɛr].<br>• <b>'Breaking' (Southern US feature)</b>: A schwa /ə/ is added to certain vowel sounds, e.g. before /ɪ/ in "bring", "things".<br>• <b>Pin-pen merger</b>: Vowels /ɪ/ and /ɛ/ merge before nasals, e.g. in "Wednesday".<br>• <b>Flapping</b>: Intervocalic /t/ becomes an alveolar flap [ɾ], e.g. "to" [rə] in connected speech.`,
                     quizText: "Six spoons of fresh snow ______, five thick slabs of blue cheese.",
                     answer: "peas"
@@ -338,7 +353,7 @@
             id: "chinese",
             tag: "East Asia — Mainland China",
             name: "Chinese English",
-            desc: "Chinese mainland English represents one of the largest English-speaking populations in the world, shaped by Mandarin and other Chinese language influences. Characterized by specific phonological patterns including final obstruent devoicing and distinctive vowel modifications, it reflects the growing global role of Chinese English speakers.",
+            desc: "Chinese English represents one of the largest English-speaking populations in the world, shaped by Mandarin and other Chinese language influences. Often characterized by specific phonological patterns including final obstruent devoicing and distinctive vowel sounds, it reflects the growing global role of Chinese English speakers.",
             specimens: [
                 {
                     id: "cn-1",
@@ -346,6 +361,7 @@
                     subtitle: "Female Speaker, Age 25 — Xiamen, Fujian",
                     audioUrl: "audio/chinese_sp01.mp3",
                     transcript: STELLA,
+                    learnerNotes: `The 'th' sounds in words like 'this' and 'month' can sound very different in different English accents. In this recording, listen to the words 'thick', 'things', and 'brother'.`,
                     analysis: `• <b>Final obstruent devoicing</b>: Voiced consonants become voiceless at word ends, e.g., "please" final /z/ → [s], "red" final /d/ → [t].<br>• <b>Interdental fricative substitution</b>: Initial /θ/ becomes [f], e.g. "thick", "things"; /ð/ becomes [d], e.g., "brother", "the" [də].<br>• <b>Consonant cluster modification</b>: /l/ and /r/ may be deleted or substituted in initial consonant clusters, e.g., "slabs" [snæp].`,
                     quizText: "Please call Stella. Ask her to bring these ______ with her from the store.",
                     answer: "things"
@@ -356,6 +372,7 @@
                     subtitle: "Female Speaker, Age 29 — Fuzhou, Fujian",
                     audioUrl: "audio/chinese_sp02.mp3",
                     transcript: STELLA,
+                    learnerNotes: `This speaker pronounces the 'th' sound in 'things' as an 's' sound, unlike speaker 1 who uses an 'f' sound. Both sounds can be heard in Chinese English.`,
                     analysis: `• <b>Final obstruent devoicing</b>: Devoicing of final consonants, e.g., "red" /d/ → [t].<br>• <b>Interdental fricative to stop</b>: /θ/ becomes [s], e.g. "things" (but not in "thick" or "three").<br>• <b>Connected speech assimilation</b>: This speaker pronounces "the" as [nə] and "these" as [nis], showing assimilation to the preceding nasal sounds (e.g. "from the", "scoop these", where "scoop" is pronounced [skun]). While assimilation is a common connected speech feature, this speaker greatly extends its scope and frequency.`,
                     quizText: "Six spoons of fresh snow ______, five thick slabs of blue cheese.",
                     answer: "peas"
@@ -366,7 +383,8 @@
                     subtitle: "Female Speaker, Age 26 — Shanxi Province",
                     audioUrl: "audio/chinese_sp03.mp3",
                     transcript: STELLA,
-                    analysis: `• <b>Final obstruent devoicing</b>: Voiced final consonants become voiceless, e.g., "spoons" [spuns], "things" [θɪŋs].<br>• <b>Vowel shortening</b>: Long vowels and diphthongs may be shortened, e.g., "need" [niːd], "scoop" [skop], "snake" [snek].`,
+                    learnerNotes: `In many English accents words like 'need' have long vowel sounds. If you listen to this speaker you can hear that she uses a short vowel sound.`,
+                    analysis: `• <b>Final obstruent devoicing</b>: Voiced final consonants become voiceless, e.g., "spoons" [spuns], "things" [θɪŋs].<br>• <b>Vowel shortening</b>: Long vowels and diphthongs may be shortened, e.g., "need" [ˈnid], "scoop" [skop], "snake" [snek].`,
                     quizText: "We also need a small ______ snake and a big toy frog for the kids.",
                     answer: "plastic"
                 }
@@ -381,9 +399,10 @@
                 {
                     id: "hk-1",
                     label: "Specimen 01",
-                    subtitle: "Male Speaker, Age 18 — Cantonese speaker (onset age 14)",
+                    subtitle: "Male Speaker, Age 18",
                     audioUrl: "audio/hongkong_sp01.mp3",
                     transcript: STELLA,
+                    learnerNotes: `Some English consonants are 'voiced', like 'z' (the buzzing sound, 'ZZZZZ'). Other English consonants are 'voiceless', like 's' (the hissing sound, 'SSSSS'). If you listen to the word 'bags' in this recording it sounds like 'backs' – there is no voicing at the end. This 'devoicing' of voiced sounds is a common feature of Hong Kong English.`,
                     analysis: `• <b>Final obstruent devoicing</b>: Devoicing of final consonants, e.g., "please" [pliːs], "these" [diːs], "things" [θɪŋs], "bags" [bæks].<br>• <b>Non-aspiration</b>: Initial voiceless stops /p, t, k/ produced without aspiration, e.g., "please" [pliːz], "call" [kɔl], "train" [tren].<br>• <b>Vowel lowering</b>: Vowels may be lowered, e.g., "please" [plɪs], "these" [dɪs].<br>• <b>Consonant substitutions</b>: /r/ may be pronounced as [w], e.g. "train" [tweɪn].`,
                     quizText: "Six spoons of fresh snow peas, five thick ______ of blue cheese.",
                     answer: "slabs"
@@ -391,9 +410,10 @@
                 {
                     id: "hk-2",
                     label: "Specimen 02",
-                    subtitle: "Female Speaker, Age 21 — Cantonese speaker",
+                    subtitle: "Female Speaker, Age 21",
                     audioUrl: "audio/hongkong_sp02.mp3",
                     transcript: STELLA,
+                    learnerNotes: `As with speaker 1, words like 'slabs' and 'kids' are pronounced with devoicing so they sound like 'slaps' and 'kits'.`,
                     analysis: `• <b>Final obstruent devoicing</b>: Voiced final consonants become voiceless, e.g., "slabs" → [slæps], "kids" → [kɪts].<br>• <b>Non-aspiration</b>: Initial voiceless stops lacking aspiration, e.g. in "kids".<br>• <b>Possible British English influence</b>: Features in words such as "plastic" show British English influence typical of Hong Kong English.`,
                     quizText: "Please call ______. Ask her to bring these things with her from the store.",
                     answer: "Stella"
@@ -401,9 +421,10 @@
                 {
                     id: "hk-3",
                     label: "Specimen 03",
-                    subtitle: "Female Speaker, Age 22 — Cantonese speaker",
+                    subtitle: "Female Speaker, Age 22",
                     audioUrl: "audio/hongkong_sp03.mp3",
                     transcript: STELLA,
+                    learnerNotes: `As well as having other features of the Hong Kong English accent, such as devoicing, this speaker uses the most common substitutions of the 'th' sounds – 'thick' sounds like 'fik', and 'these' sounds like 'dese'.`,
                     analysis: `• <b>Final obstruent devoicing</b>: Consistent devoicing of final consonants, e.g., "these" [diːs], "bags" [bæks].<br>• <b>Interdental fricative substitution</b>: /θ/ becomes [f], e.g., "thick" [fɪk], "with" [wɪf]; /ð/ becomes [d], e.g. "these" [diːs].<br>• <b>W to labial fricative</b>: /w/ may become [v] or bilabial fricative, e.g., "we" [vi].<br>• <b>Obstruent deletion / consonant cluster modification</b>: Deletion of consonants in clusters, e.g., /r/ in "frog"; some single final consonants deleted, e.g. /v/ in "five" [faɪː]; diphthong shortening: /eɪ/ → [e] in "snake", "maybe".`,
                     quizText: "She can scoop these things into three red ______.",
                     answer: "bags"
@@ -422,7 +443,8 @@
                     subtitle: "Male Speaker, Age 25 — Karachi (Urdu speaker with Gujarati/Sindhi)",
                     audioUrl: "audio/pakistani_sp01.mp3",
                     transcript: STELLA,
-                    analysis: `• <b>British English-influenced accent</b>: This speaker has a British English-influenced accent and shows almost none of the features often associated with Pakistani English.`,
+                    learnerNotes: `In today's world it is common for people to have a different accent from the one that goes with their place of birth. For example, this speaker was born in Karachi in Pakistan but many people would say he has a British English accent.`,
+                    analysis: `• <b>British English-influenced accent</b>: This speaker has a British English-influenced accent and shows almost none of the features often associated with Pakistani English.<br>• <b>Aspiration</b>: One interesting feature is the aspirated 'p' sound in 'spoon' (it is normally unaspirated in this position). It may not be a systematic feature of the speaker or the accent, however.`,
                     quizText: "Please call Stella. Ask her to bring these things with her from the ______.",
                     answer: "store"
                 },
@@ -432,6 +454,7 @@
                     subtitle: "Male Speaker, Age 22 — Karachi (Urdu speaker with multiple regional languages)",
                     audioUrl: "audio/pakistani_sp02.mp3",
                     transcript: STELLA,
+                    learnerNotes: `If you listen to the 'w' sounds in 'with' and 'we' you can hear they sound more like 'v' – this is a common feature of Pakistani English and South Asian English accents.`,
                     analysis: `• <b>Final obstruent devoicing</b>: Devoicing of final voiced consonants, e.g., "please" → [pliːs], "things" → [θɪŋs].<br>• <b>Interdental fricative to retroflex stop</b>: /θ, ð/ become dental retroflex stops [ʈ, ɖ / t̪, d̪], e.g., "thick" [θɪk], "the" [ðə].<br>• <b>W to labial fricative</b>: /w/ may become [v] in some positions, e.g., "with" [vɪθ], "we" [vi].<br>• <b>Retroflexing</b>: Alveolar consonants become retroflex [ʈ, ɖ, ɳ, ɭ, ɽ], influenced by Urdu phonology.<br>• <b>Vowel shortening and raising</b>: Combined vowel modifications.`,
                     quizText: "Six spoons of fresh snow peas, five thick ______ of blue cheese.",
                     answer: "slabs"
@@ -442,6 +465,7 @@
                     subtitle: "Female Speaker, Age 48 — Sialkot (Urdu speaker with Punjabi)",
                     audioUrl: "audio/pakistani_sp03.mp3",
                     transcript: STELLA,
+                    learnerNotes: `The 'th' sounds in 'thick' and 'things' are interesting here. Unlike Hong Kong English speakers, who often use 'f', and Chinese English speakers, who may use 's' or 'z' sounds, this speaker uses a 't' sound so that the words resemble 'tick' and 'tings'. This is another common feature of Pakistani English and South Asian English accents.`,
                     analysis: `• <b>Interdental fricative to dental stop</b>: /θ/ realized as dental [t̪], e.g., "thick" [θɪk], "things" [θɪŋz].<br>• <b>W to labial fricative</b>: /w/ → [v] in many environments, e.g., "with" [vɪθ], "Wednesday" [ˈvɛnzdeɪ].<br>• <b>Retroflexing</b>: Extensive retroflexion of alveolar consonants, e.g., "Stella" [ˈʂʈeːɭa], "store" [Stɔːr].`,
                     quizText: "She can scoop these things into ______ red bags.",
                     answer: "three"
@@ -554,6 +578,7 @@
         document.getElementById('det-name').innerText = sp.subtitle;
         document.getElementById('det-transcript').innerText = `"${sp.transcript}"`;
         document.getElementById('det-analysis').innerHTML = sp.analysis;
+        document.getElementById('det-learner-notes').innerHTML = sp.learnerNotes || '';
         document.getElementById('det-quiz-text').innerText = sp.quizText;
         document.getElementById('quiz-input').value = '';
         document.getElementById('quiz-feedback').classList.add('hidden');
@@ -614,6 +639,7 @@
     function setMode(mode) {
         const isLinguist = mode === 'linguist';
         document.getElementById('linguist-content').classList.toggle('hidden', !isLinguist);
+        document.getElementById('learner-notes-content').classList.toggle('hidden', isLinguist);
         const on = "px-7 py-3 rounded-xl text-sm font-semibold tracking-wide transition btn-toggle-active";
         const off = "px-7 py-3 rounded-xl text-sm font-semibold tracking-wide transition opacity-50";
         document.getElementById('btn-linguist').className = isLinguist ? on : off;
